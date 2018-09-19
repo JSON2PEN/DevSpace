@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Devspace</string>
+    <string name="title_activity_poker">PokerActivity</string>
 </resources>
