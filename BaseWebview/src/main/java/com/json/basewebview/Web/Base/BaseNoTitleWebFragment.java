@@ -455,8 +455,8 @@ public abstract class BaseNoTitleWebFragment<T extends BaseJsInterface> extends 
                         }
                     }
                 }
-                mWebView.goBack();
             }
+            mWebView.goBack();
         }
     }
 

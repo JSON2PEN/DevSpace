@@ -18,10 +18,29 @@ public class AppHelper {
     public static boolean isMobile;
     public static boolean isConnected;
     private static NetworkStateReceiver networkStateReceiver;
-
     public static void init(Context mContext) {
         AppHelper.mContext = mContext;
         registerNetworkState();
+    }
+
+    /**
+     * 判断当前进程是不是主进程
+     * @param mContext 上下文
+     * @param pid 当前进程的pid
+     * @return
+     */
+    public static boolean isMainProcess(Context mContext,int pid) {
+        String processNameString = "";
+        ActivityManager mActivityManager = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningAppProcessInfo appProcess : mActivityManager.getRunningAppProcesses()) {
+            if (appProcess.pid == pid) {
+                processNameString = appProcess.processName;
+            }
+        }
+        if (mContext.getPackageName().equals(processNameString)) {
+            return true;
+        }
+        return false;
     }
 
     /**
