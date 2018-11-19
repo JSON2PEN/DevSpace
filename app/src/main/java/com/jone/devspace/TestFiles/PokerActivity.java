@@ -43,32 +43,43 @@ public class PokerActivity extends AppCompatActivity {
     private List<String> c_Poker = new ArrayList<>();
 
     public void main() {
-        if (poker.size()!=0){
+        if (poker.size() != 0) {
             poker.clear();
-        } if (a_Poker.size()!=0){
+        }
+        if (a_Poker.size() != 0) {
             a_Poker.clear();
-        } if (b_Poker.size()!=0){
+        }
+        if (b_Poker.size() != 0) {
             b_Poker.clear();
-        } if (c_Poker.size()!=0){
+        }
+        if (c_Poker.size() != 0) {
             c_Poker.clear();
         }
-        if(localPoker.size()==0){
+        if (localPoker.size() == 0) {
             String[] huase = {"♥", "♠", "♦", "♣"};
             //一副扑克牌的牌面是1-10，J,Q,K13种情况
             String[] cardsNumber = {
                     "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"
             };
             String type = null;
+            int one = (int) ((Math.random()) * 12);
+            int two = getNoRepeatIndex(one);
             for (int i = 0; i < huase.length; i++) {
                 type = huase[i];
                 for (int j = 0; j < cardsNumber.length; j++) {
+                    if (j == one) {
+                        poker.add("大王");
+                        one = 100;
+                    }
+                    if (j == two) {
+                        poker.add("小王");
+                        two = 100;
+                    }
                     poker.add(type + ":" + cardsNumber[j]);
                 }
             }
-            poker.add("大王");
-            poker.add("小王");
-        }else {
-            poker=localPoker;
+        } else {
+            poker = localPoker;
         }
 
         int size = 54;
@@ -92,24 +103,32 @@ public class PokerActivity extends AppCompatActivity {
             size--;
             poker.remove(currentIndex);
         }
-        if (localPoker.size()!=0){
+        if (localPoker.size() != 0) {
             localPoker.clear();
+            localPoker.addAll(poker);
             localPoker.addAll(a_Poker);
             localPoker.addAll(b_Poker);
             localPoker.addAll(c_Poker);
-            localPoker.addAll(poker);
         }
-        sortList(a_Poker,tvA);
-        sortList(b_Poker,tvB);
-        sortList(c_Poker,tvC);
-        sortList(poker,tvD);
+        sortList(a_Poker, tvA);
+        sortList(b_Poker, tvB);
+        sortList(c_Poker, tvC);
+        sortList(poker, tvD);
     }
 
-    public void sortList(List<String> mList,TextView tv) {
+    private int getNoRepeatIndex(int num) {
+        int current = (int) ((Math.random()) * 12);
+        if (num == current) {
+            return getNoRepeatIndex(num);
+        }
+        return current;
+    }
+
+    public void sortList(List<String> mList, TextView tv) {
         Collections.sort(mList, new SortByDigital());
-        String result ="";
-        for(String s:mList){
-            result=result+s+" ";
+        String result = "";
+        for (String s : mList) {
+            result = result + s + " ";
         }
         tv.setText(result);
     }

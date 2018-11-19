@@ -3,6 +3,14 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent">
+    <TextView
+        android:background="@color/Blue"
+        android:layout_marginHorizontal="10dp"
+        android:text="跳转洗牌页面"
+        android:id="@+id/tv_topoker"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="60dp" />
 
     <TextView
         android:id="@+id/tv_hello"

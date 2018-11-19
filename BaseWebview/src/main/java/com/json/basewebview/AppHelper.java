@@ -1,5 +1,6 @@
 package com.json.basewebview;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.view.WindowManager;
